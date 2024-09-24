@@ -1,7 +1,7 @@
 #### Preamble ####
-# Purpose: Cleans the Marriage License data
+# Purpose: Clenas the results of Toronto Citizens' Climate Change Perception
 # Author: Aamishi Avarsekar
-# Date: 19th September 2024
+# Date: 24th September 2024
 # Contact: aamishi.avarsekar@mail.utoronto.ca
 # License: MIT
 

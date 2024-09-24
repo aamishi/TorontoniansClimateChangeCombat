@@ -1,7 +1,7 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from OpenDataToronto
+# Purpose: Downloads and saves the data of Toronto Citizens' Climate Change Perception (OpenDataToronto)
 # Author: Aamishi Avarsekar
-# Date: 19th September 2024
+# Date: 24th September 2024
 # Contact: aamishi.avarsekar@mail.utoronto.ca
 # License: MIT
 
@@ -9,7 +9,6 @@
 #### Workspace setup ####
 library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
 
 #### Download data ####
 # get package

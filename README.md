@@ -1,8 +1,10 @@
-# Starter folder
+# How Torontonians are Combating Climate Change
 
 ## Overview
 
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
+This GitHub Repository contains all necessary files used to reproduce the paper "How Torontonians are Combating Climate Change". This README file will be updated as the paper is being written.
+
+
 
 
 ## File Structure
@@ -19,12 +21,10 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-Aspects of the code were written with the help of the auto-complete tool, Codriver. The abstract and introduction were written with the help of ChatHorse and the entire chat history is available in inputs/llms/usage.txt.
+Aspects of the code were written with the help ChatGPT3.5 and ChatGPT4.0. The chat history files can be found in other/llm.
 
 ## Some checks
 
-- [ ] Change the rproj file name so that it's not starter_folder.Rproj
-- [ ] Change the README title so that it's not Starter folder
 - [ ] Remove files that you're not using
 - [ ] Update comments in R scripts
 - [ ] Remove this checklist
