@@ -13,28 +13,40 @@ library(tidyverse)
 
 
 #### Simulate data ####
-set.seed(213)
+set.seed(613)
 
-# Define the start and end date
-start_date <- as.Date("2023-06-01")
-end_date <- as.Date("2023-12-31")
+# Set the number of random participants to generate
+number_of_participants <- 100
 
-# Set the number of random dates you want to generate
-number_of_dates <- 200
+# Questions Options
+question_1_options <-sample(c("Very Likely", "Likely", "Neutral", "Unlikely", "Very Unlikely"), 
+                            number_of_participants, replace = TRUE)
+question_2_options <- sample(c("Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"), 
+                            number_of_participants, replace = TRUE)
+question_3_options <- sample(c("Aware, Participating", "Aware, Not Participating", "Not Participating"), 
+                             number_of_participants, replace = TRUE)
+sex <- sample(c("Male", "Female"), number_of_participants, replace = TRUE)
+area_of_city <- sample(c("Toronto", "Markham", "North York", "Scarborough"), 
+                      number_of_participants, replace = TRUE)
+
+# Simulate 100 random ages with a mean of 35 and a standard deviation of 10
+age_data <- rnorm(100, mean = 35, sd = 10)
+
+# Round the ages to whole numbers and set minimum and maximum age bounds
+age_data <- round(age_data)
+age_data[age_data < 18] <- 18  # set minimum age to 18
+age_data[age_data > 80] <- 80  # set maximum age to 80
+
 
 #### Simulate data ####
-sample_marriage_data <-
-  tibble(
-    dates = as.Date(
-      runif(
-        n = number_of_dates,
-        min = as.numeric(start_date),
-        max = as.numeric(end_date)
-      ),
-      origin = "1970-01-01"
-    ),
-    number_of_marriage = rpois(n = number_of_dates, lambda = 15)
-  )
+survey_data <- data.frame(
+  Sex = sex,
+  Age = age_data,
+  Area = area_of_city,
+  Climate_Concern = question_1_options,
+  Govt_Efforts = question_2_options,
+  Personal_Action = question_3_options
+)
 
 
 
