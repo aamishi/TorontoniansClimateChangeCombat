@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data of Toronto Citizens' Climate Change Perception (OpenDataToronto)
+# Purpose: Downloads and saves the data of Climate Perception Study (OpenDataToronto)
 # Author: Aamishi Avarsekar
 # Date: 24th September 2024
 # Contact: aamishi.avarsekar@mail.utoronto.ca
@@ -9,13 +9,16 @@
 #### Workspace setup ####
 library(opendatatoronto)
 library(tidyverse)
+library(dplyr)
+
 
 #### Download data ####
 # get package
-package <- show_package("e28bc818-43d5-43f7-b5d9-bdfb4eda5feb")
+package_id_string <- "66ab9e95-a343-4f07-bc4f-56f82dcdc598"
+package <- show_package(package_id_string)
 
 # get all resources for this package
-resources <- list_package_resources("e28bc818-43d5-43f7-b5d9-bdfb4eda5feb")
+resources <- list_package_resources(package_id_string)
 
 # identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
 datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))
@@ -24,8 +27,6 @@ datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'
 data <- filter(datastore_resources, row_number()==1) %>% 
   get_resource()
 
-
 #### Save data ####
-write_csv(data, "data/raw_data/raw_data.csv") 
-
+write_csv(data, "data/raw_data/raw_data.csv")
          
