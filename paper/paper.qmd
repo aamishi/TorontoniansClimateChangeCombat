@@ -6,13 +6,12 @@ author:
 thanks: "Code and data are available at: https://github.com/aamishi/TorontoniansCombatClimateChange"
 date: today
 date-format: long
-abstract: "The abstract will be updated closer to the deadline"
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
 
-```{r}
+```{r, echo=FALSE}
 #| include: false
 #| warning: false
 #| message: false
@@ -24,31 +23,46 @@ library(palmerpenguins)
 
 # Introduction
 
-In this week's reflection exercise, I will take a look at where people from GTA are most likely to register their marriage. I will be using @citeR to simulate, test and analyse this data. I will download the data from @opendatatoronto.
+This paper investigates the areas of improvement that the Citizens of Toronto seek for within the city. Pointedly, it studies the demographic difference of different ages and social groups and their inclination towards funding or defunding Toronto’s future.
 
+The data for this paper is sourced from Open Data Toronto (@opendatatoronto) and is downloaded, cleaned and analyzed using the R Programming language (@citeR).
+
+Aspects of this paper were written using the LLM ChatGPT 3.5 and 4.0.
 
 
 # Data {#sec-mydatasection}
 
-Some of our data is of penguins (@fig-marriage), from @palmerpenguins.
+```{r, echo=FALSE}
+#| echo: false
+analysis_data <- read_csv("../data/analysis_data/analysis_data_demo.csv", show_col_types = FALSE)
 
-```{r}
+# demographs for defunding
+# Step 1: Summarize to get total counts for DecreaseFunding (ignoring age for now)
+top_decrease_funding <- analysis_data %>%
+  group_by(DecreaseFunding) %>%
+  summarise(total_count = n(), .groups = 'drop') %>%
+  arrange(desc(total_count)) %>%
+  top_n(5, wt = total_count) %>%
+  pull(DecreaseFunding)
+
+# Step 2: Now group by DecreaseFunding and age, and filter for the top 5 bins
+data_summary <- analysis_data %>%
+  filter(DecreaseFunding %in% top_decrease_funding) %>%  # Filter for only top 5 bins
+  group_by(DecreaseFunding, Age) %>%
+  summarise(count = n(), .groups = 'drop') %>%
+  arrange(desc(count))
+
+# Step 3: Create the bar plot for the top 5 bins, facet by age
+ggplot(data_summary, aes(x = reorder(DecreaseFunding, -count), y = count, fill = Age)) +
+  geom_bar(stat = "identity", position = "stack", color = "black") +  # Or 'stack' for stacked bars
+  labs(title = "Top 5 DecreaseFunding Bins with Age Information", x = "DecreaseFunding", y = "Count") +
+  theme_minimal()
+
+
 ```
-
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-
-```
-
-Talk way more about it. 
 
 
 # Results
-
-Our results are summarized in @tbl-modelresults.
 
 ```{r}
 
@@ -63,17 +77,6 @@ Our results are summarized in @tbl-modelresults.
 
 # Discussion
 
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
 
 \newpage
 
@@ -85,10 +88,6 @@ Weaknesses and next steps should also be included.
 # Additional data details
 
 ## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
 
 ```{r}
 
