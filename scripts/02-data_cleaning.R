@@ -88,4 +88,5 @@ simplified_data_04_no_na <- simplified_data_03 %>%
 
 
 #### Save data ####
-write_csv(cleaned_data, "outputs/data/analysis_data.csv")
+# write_csv(simplified_data_04_no_demo, "data/analysis_data/analysis_data_no_demo.csv")
+write_csv(simplified_data_04_no_na, "data/analysis_data/analysis_data_demo.csv")
